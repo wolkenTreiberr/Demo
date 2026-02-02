@@ -1,13 +1,57 @@
-# Gradle
-.gradle/
+.gradle
 build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# IDE
-.idea/
+### IntelliJ IDEA ###
+.idea/*
+!.idea/runConfigurations/
+*.iws
 *.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-# Kotlin
-*.class
+### Kotlin ###
+.kotlin
 
-# OS
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
 .DS_Store
+
+### Claude Code ###
+tmpclaude-*
+/temp/
+/bp-property-catalog/.env
+/bp-property-catalog/.env
+**/fileStorage/
+/tools/
+
+### Google OAuth tokens ###
+**/tokens/
+
+### Storage ###
+/storage/
