@@ -36,6 +36,19 @@ fun task1_1() {
     )
 
     // TODO: твой код здесь
+    //  Для больших объемов
+//    val result = orders.asSequence()
+//        .filter { it.isPaid }
+//        .sortedByDescending { it.amount }
+//        .take(3)
+//        .toList()
+
+    val result = orders
+        .filter { it.isPaid }
+        .sortedByDescending { it.amount }
+        .take(3)
+
+    println(result)
 
     // Ожидаемый вывод:
     // Топ-3 оплаченных заказа:
@@ -64,6 +77,12 @@ fun task1_2() {
     )
 
     // TODO: твой код здесь
+
+    val adultUsersList = users
+        .filter { it.age >= 18 }
+        .map { "${it.name} (${it.age})" }
+
+    println(adultUsersList)
 
     // Ожидаемый вывод:
     // Совершеннолетние пользователи:
@@ -94,6 +113,13 @@ fun task1_3() {
 
     // TODO: твой код здесь
 
+    val productNumber = products.size
+//    val averagePrice = products.sumOf { it.price } / productNumber
+    val averagePrice = products.map { it.price }
+        .average()
+    val maxPrice = products.maxByOrNull { it.price }
+    val isPriceLessThan1000 = products.any { it.price < 1000 }
+
     // Ожидаемый вывод:
     // Всего товаров: 5
     // Средняя цена: 21060.0
@@ -117,11 +143,18 @@ fun task1_3() {
  */
 fun task2_1() {
     val cart = mutableListOf<String>()
+    val products = listOf("Молоко", "Хлеб", "Сыр")
 
     // TODO: твой код здесь
     // Добавь: "Молоко", "Хлеб", "Сыр"
     // Удали: "Хлеб"
     // Добавь в начало: "Яйца"
+
+    cart.addAll(products)
+//    cart.removeAt(1)
+    cart.remove("Хлеб")
+    cart.addFirst("Яйца")
+    cart.forEachIndexed { index, product -> println("${index + 1}: $product")}
 
     // Ожидаемый вывод:
     // Корзина:
@@ -151,7 +184,16 @@ fun task2_2() {
     // TODO:
     // 1. Удали первую задачу (выполнена)
     // 2. Добавь в начало: Task(4, "Срочный деплой", "critical")
-    // 3. Замени задачу с priority="low" на Task(5, "Документация API", "medium")
+    // 3. Замени задачу с priority="low" на Task(6, "Документация API", "medium")
+
+    taskQueue.add(Task(4, "Код ревью", "medium"))
+    taskQueue.removeAt(0)
+    taskQueue.addFirst(Task(5, "Срочный деплой", "critical"))
+    val index = taskQueue.indexOfFirst { it.priority == "low" }
+    if (index != -1) {
+        taskQueue[index] = Task(6, "Документация API", "medium")
+    }
+
 
     // Ожидаемый вывод:
     // Очередь задач:
@@ -180,6 +222,16 @@ fun task3_1() {
 
     // TODO: твой код здесь
 
+    val isAdminRoleExists = "ADMIN" in userRoles
+    val isAdminRoleExists2 = userRoles.contains("ADMIN")
+    val isAdminRoleExists3 = userRoles.any { it == "ADMIN" }
+
+    val isAdminOrModeratorRoleExists = userRoles.any { it in requiredRoles }
+
+    val bothHaveRoles = userRoles.count { it in otherUserRoles }
+    val bothHaveRoles2 = userRoles.intersect(requiredRoles).size
+
+
     // Ожидаемый вывод:
     // Является админом: false
     // Имеет права модерации: true
@@ -199,6 +251,19 @@ fun task3_2() {
     val articleTags = setOf("kotlin", "backend", "spring", "android")
 
     // TODO: твой код здесь
+
+    val uniqueTags = blogTags union articleTags
+    val uniqueTags2 = blogTags + articleTags
+    val uniqueTags3 = buildSet {
+        addAll(blogTags)
+        addAll(articleTags)
+    }
+
+    val sameTags = uniqueTags.intersect(articleTags)
+    val sameTags2 = blogTags.filter { it in articleTags }.toSet()
+
+    val uniqueBlogTags2 = blogTags subtract uniqueTags
+    val uniqueBlogTags = blogTags - articleTags
 
     // Ожидаемый вывод:
     // Все уникальные теги: [kotlin, android, mobile, jetpack, backend, spring]
@@ -228,6 +293,23 @@ fun task4_1() {
     // 3. Зашли: "alice" (повторно!), "diana"
     // 4. Проверь, онлайн ли "bob" и "diana"
 
+    val usersList = listOf("alice", "bob", "charlie")
+    onlineUsers.addAll(usersList)
+    println("Зашли: ${usersList.joinToString(", ")}")
+
+    onlineUsers.remove("bob")
+    println("Вышел: bob")
+
+    onlineUsers.addAll(listOf("alice", "diana"))
+    println("Зашли: 'alice'(повторно), 'diana'")
+
+    println("'bob' онлайн - ${onlineUsers.contains("bob")}")
+    println("'bob' онлайн - ${"bob" in onlineUsers}")
+    println("'diana' онлайн - ${onlineUsers.contains("diana")}")
+    println("'diana' онлайн - ${"diana" in onlineUsers}")
+
+    println("Онлайн: ${onlineUsers.size} пользователь(ля)")
+
     // Ожидаемый вывод:
     // Онлайн сейчас: [alice, charlie, diana]
     // bob онлайн: false
@@ -250,6 +332,12 @@ fun task4_2() {
     // 1. Добавь теги: "kotlin", "programming", "android"
     // 2. Удали теги: "java", "beginner"
     // 3. Выведи результат
+
+    val newTags = listOf("kotlin", "programming", "android")
+    articleTags.addAll(newTags)
+    articleTags.removeAll(listOf("java", "beginner"))
+    println("Теги статьи: $articleTags")
+    println("Количество тегов: ${articleTags.size}")
 
     // Ожидаемый вывод:
     // Теги статьи: [programming, tutorial, kotlin, android]
@@ -283,6 +371,14 @@ fun task5_1() {
     // 3. Проверь, есть ли "db.password"
     // 4. Выведи все ключи конфига
 
+    println("Имя приложения: ${config["app.name"]}")
+    println("Имя приложения: ${config["app.name"]}")
+    println("Режим отладки: ${config["app.debug"] ?: "false"}")
+    println("Режим отладки: ${config["app.debug"] ?:  "false"}")
+    println("Пароль БД задан: ${config.contains("db.password")}")
+    println("Пароль БД задан: ${"db.password" in config}")
+    println("Все настройки: ${config.keys}")
+
     // Ожидаемый вывод:
     // Имя приложения: MyApp
     // Режим отладки: false
@@ -310,6 +406,13 @@ fun task5_2() {
 
     // TODO: твой код здесь
 
+    val employeeMapById = employees.associateBy({ it.id }, { it.name })
+    val employeeMapByDep = employees.groupBy({it.department}, {it.name})
+
+    println("Сотрудник с ID=3: ${employeeMapById[3]}")
+    println("Сотрудники IT отдела: ${employeeMapByDep["IT"]}")
+    println("Количество в HR: ${employeeMapByDep["HR"]?.size}")
+
     // Ожидаемый вывод:
     // Сотрудник с ID=3: Пётр
     // Сотрудники IT отдела: [Иван, Пётр]
@@ -335,6 +438,10 @@ fun task5_3() {
 
     // TODO: переведи каждое слово, если перевода нет — выведи "[нет перевода]"
 
+    wordsToTranslate.forEach {
+        println("$it -> ${dictionary[it]?:"[нет перевода]"}")
+    }
+
     // Ожидаемый вывод:
     // hello -> привет
     // world -> мир
@@ -354,9 +461,18 @@ fun task5_3() {
  */
 fun task6_1() {
     val words = listOf("kotlin", "java", "kotlin", "python", "kotlin", "java")
-    val wordCount = mutableMapOf<String, Int>()
+//    val wordCount = mutableMapOf<String, Int>()
 
     // TODO: подсчитай количество каждого слова
+
+//    words.forEach {
+//        wordCount[it] = wordCount.getOrDefault(it, 0) + 1
+//    }
+
+    val wordCount = words.groupingBy { it }.eachCount()
+
+    println("Частота слов:")
+    wordCount.forEach { println("${it.key} : ${it.value}") }
 
     // Ожидаемый вывод:
     // Частота слов:
@@ -386,6 +502,22 @@ fun task6_2() {
     // 4. Удали пользователя с id=1
     // 5. Выведи финальное состояние кэша
 
+    val alice = UserProfile(1, "Alice", "alice@mail.com")
+    val bob = UserProfile(2, "Bob", "bob@mail.com")
+
+    userCache[alice.id] = alice
+    userCache[bob.id] = bob
+
+    val user1 = userCache[1]
+
+    println("Пользователь 1: ${user1?.name} (${user1?.email})")
+
+    userCache[2] = userCache[2]!!.copy(email = "bob.new@mail.com")
+    userCache.remove(1)
+
+    println("После обновления и удаления:")
+    println("Кэш: $userCache")
+
     // Ожидаемый вывод:
     // Пользователь 1: Alice (alice@mail.com)
     // После обновления и удаления:
@@ -413,6 +545,19 @@ fun task6_3() {
 
     // TODO: подсчитай сумму продаж по каждой категории
 
+    val salesByCategory2 = sales.groupBy { it.category }
+        .mapValues { (_, items) -> items.sumOf { it.amount } }
+    println(salesByCategory2)
+
+//    sales.forEach {
+//        salesByCategory[it.category] = salesByCategory.getOrDefault(it.category, 0.0) + it.amount
+//    }
+
+    println("Продажи по категориям:")
+    salesByCategory2.forEach {
+        println("${it.key}: ${it.value}")
+    }
+
     // Ожидаемый вывод:
     // Продажи по категориям:
     // Electronics: 45000.0
@@ -429,12 +574,12 @@ fun main() {
     println("=== Запусти нужную задачу, раскомментировав её ===")
 
     // LIST (Read-only)
-    // task1_1()
+//     task1_1()
     // task1_2()
     // task1_3()
 
     // MUTABLELIST
-    // task2_1()
+//     task2_1()
     // task2_2()
 
     // SET (Read-only)
@@ -442,16 +587,16 @@ fun main() {
     // task3_2()
 
     // MUTABLESET
-    // task4_1()
-    // task4_2()
+//     task4_1()
+//     task4_2()
 
     // MAP (Read-only)
-    // task5_1()
-    // task5_2()
-    // task5_3()
+//     task5_1()
+//     task5_2()
+//     task5_3()
 
     // MUTABLEMAP
-    // task6_1()
-    // task6_2()
-    // task6_3()
+//     task6_1()
+//     task6_2()
+//     task6_3()
 }
