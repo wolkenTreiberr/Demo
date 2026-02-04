@@ -228,9 +228,9 @@ fun task6() {
         is Triangle -> (shape.base * shape.height) / 2
     }
     // После реализации area() раскомментируй:
-     println("Круг: ${area(Circle(5.0))}")
-     println("Прямоугольник: ${area(Rectangle(4.0, 6.0))}")
-     println("Треугольник: ${area(Triangle(3.0, 8.0))}")
+//     println("Круг: ${area(Circle(5.0))}")
+//     println("Прямоугольник: ${area(Rectangle(4.0, 6.0))}")
+//     println("Треугольник: ${area(Triangle(3.0, 8.0))}")
 
     // Ожидаемый вывод:
     // Круг: 78.53981633974483
@@ -255,19 +255,27 @@ fun task6() {
  */
 fun processData(data: Any): String {
     // TODO: перепиши этот код — исправь все антипаттерны
-    val result: String
-    if (data is String) {
-        result = (data as String).uppercase()
-    } else if (data is Int) {
-        result = (data as Int).toString()
-    } else if (data is Boolean) {
-        if (data as Boolean) {
-            result = "true"
-        } else {
-            result = "false"
-        }
-    } else {
-        result = "unknown"
+//    val result: String
+//    if (data is String) {
+//        result = (data as String).uppercase()
+//    } else if (data is Int) {
+//        result = (data as Int).toString()
+//    } else if (data is Boolean) {
+//        if (data as Boolean) {
+//            result = "true"
+//        } else {
+//            result = "false"
+//        }
+//    } else {
+//        result = "unknown"
+//    }
+//    return result
+
+    val result = when(data) {
+        is String -> data.uppercase()
+        is Int -> data.toString()
+        is Boolean -> "true"
+        else -> "unknown"
     }
     return result
 }
@@ -346,7 +354,7 @@ fun main() {
 //     task6()
 
     // АНТИПАТТЕРНЫ
-    // task7()
+//     task7()
 
     // TYPE INFERENCE
     // task8()
