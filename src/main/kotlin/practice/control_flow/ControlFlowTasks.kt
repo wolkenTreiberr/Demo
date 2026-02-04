@@ -1,5 +1,7 @@
 package practice.control_flow
 
+import kotlin.math.pow
+
 /**
  * Практические задачи по управляющим конструкциям Kotlin
  *
@@ -220,10 +222,15 @@ class Triangle(val base: Double, val height: Double) : Shape()
 // TODO: напиши функцию area(shape: Shape): Double
 
 fun task6() {
+    fun area(shape: Shape): Double = when(shape) {
+        is Circle -> 3.14 * shape.radius.pow(2)
+        is Rectangle -> shape.width * shape.height
+        is Triangle -> (shape.base * shape.height) / 2
+    }
     // После реализации area() раскомментируй:
-    // println("Круг: ${area(Circle(5.0))}")
-    // println("Прямоугольник: ${area(Rectangle(4.0, 6.0))}")
-    // println("Треугольник: ${area(Triangle(3.0, 8.0))}")
+     println("Круг: ${area(Circle(5.0))}")
+     println("Прямоугольник: ${area(Rectangle(4.0, 6.0))}")
+     println("Треугольник: ${area(Triangle(3.0, 8.0))}")
 
     // Ожидаемый вывод:
     // Круг: 78.53981633974483
@@ -336,7 +343,7 @@ fun main() {
     // task5()
 
     // EXHAUSTIVE WHEN + SEALED CLASS
-    // task6()
+//     task6()
 
     // АНТИПАТТЕРНЫ
     // task7()
