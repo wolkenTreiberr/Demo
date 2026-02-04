@@ -33,13 +33,15 @@ fun task1() {
     val temperature = 35
 
     // TODO: замени код ниже на if-expression (одна строка: val result = ...)
-    var result: String
-    if (temperature > 30) {
-        result = "Жарко"
-    } else {
-        result = "Нормально"
-    }
+//    var result: String
+//    if (temperature > 30) {
+//        result = "Жарко"
+//    } else {
+//        result = "Нормально"
+//    }
 
+
+    var result = if(temperature > 30) "Жарко" else "Нормально"
     println(result)
 
     // Ожидаемый вывод:
@@ -60,15 +62,22 @@ fun task2() {
     val code = 404
 
     // TODO: замени код ниже на when-expression
-    val message: String
-    if (code == 200) {
-        message = "OK"
-    } else if (code == 404) {
-        message = "Not Found"
-    } else if (code == 500) {
-        message = "Server Error"
-    } else {
-        message = "Unknown"
+//    val message: String
+//    if (code == 200) {
+//        message = "OK"
+//    } else if (code == 404) {
+//        message = "Not Found"
+//    } else if (code == 500) {
+//        message = "Server Error"
+//    } else {
+//        message = "Unknown"
+//    }
+
+    val message = when(code) {
+        202 -> "OK"
+        404 -> "Not Found"
+        500 -> "Server Error"
+        else -> "Unknown"
     }
 
     println(message)
@@ -98,6 +107,12 @@ fun task2() {
 // TODO: напиши функцию describe(input: Any): String
 
 fun task3() {
+    fun describe(input: Any): String = when(input) {
+        is Int -> "Целое число: $input"
+        is String -> "Строка длиной ${input.length}"
+        is Boolean -> "Логическое: $input"
+        else -> "Неизвестный тип"
+    }
     // После реализации describe() раскомментируй:
     // println(describe(42))
     // println(describe("Kotlin"))
@@ -127,9 +142,10 @@ fun task3() {
 class Container(var value: Any?) {
     fun printIfString() {
         // TODO: этот код не скомпилируется — исправь его
-        // if (value is String) {
-        //     println(value.length)
-        // }
+        val value2 = value
+         if (value2 is String) {
+             println(value2.length)
+         }
     }
 }
 
@@ -161,6 +177,13 @@ fun task4() {
 // TODO: напиши функцию classify(score: Int): String
 
 fun task5() {
+    fun classify(score: Int): String = when(score) {
+        in 90..100 -> "Отлично"
+        in 75..89 -> "Хорошо"
+        in 60..74 -> "Удовлетворительно"
+        in 0..59 -> "Неудовлетворительно"
+        else -> "Ошибка: некорректная оценка"
+    }
     // После реализации classify() раскомментируй:
     // println(classify(95))
     // println(classify(82))
