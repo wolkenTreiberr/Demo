@@ -7,7 +7,7 @@
 ## I. Kotlin
 
 ### 1. Основы языка
-> [Теория](language_basics/Основы%20языка.md)
+> [Теория](src/main/kotlin/practice/language_basics/Основы%20языка.md)
 
 - val / var (immutable / mutable)
 - Типы данных (Int, Double, Boolean, Char, String и др.)
@@ -23,13 +23,13 @@
 - let с null check
 
 ### 3. Control Flow
-> [Теория](control_flow/Управляющие%20конструкции.md) | [Задания](control_flow/ControlFlowTasks.kt)
+> [Теория](src/main/kotlin/practice/control_flow/Управляющие%20конструкции.md) | [Задания](src/main/kotlin/practice/control_flow/ControlFlowTasks.kt)
 
 - if / else (statement + expression)
 - when (statement + expression)
 
 ### 4. Циклы
-> [Теория](loops/Циклы.md) | [Задания](loops/LoopTasks.kt)
+> [Теория](src/main/kotlin/practice/loops/Циклы.md) | [Задания](src/main/kotlin/practice/loops/LoopTasks.kt)
 
 - for loop + ranges (.. until downTo step)
 - while / do-while
@@ -66,7 +66,7 @@
 - `*` Anonymous classes / object expressions
 
 ### 8. Коллекции
-> [Теория](collections/Коллекции.md) | [Задания](collections/CollectionsTasks.kt)
+> [Теория](src/main/kotlin/practice/collections/Коллекции.md) | [Задания](src/main/kotlin/practice/collections/CollectionsTasks.kt)
 
 - List / MutableList
 - Set / MutableSet
@@ -208,7 +208,7 @@
 - `*` CORS — концепция
 
 ### 6. Git и Version Control
-> [Команды](git/git_commands.md) | [Практика](git/GitPractice.md)
+> [Команды](src/main/kotlin/practice/git/git_commands.md) | [Практика](src/main/kotlin/practice/git/GitPractice.md)
 
 - Основы Git (clone, add, commit, push, pull, branch, merge)
 - Feature branches, Git Flow
