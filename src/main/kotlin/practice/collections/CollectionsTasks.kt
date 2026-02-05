@@ -1,4 +1,4 @@
-package practice
+package practice.collections
 
 /**
  * Практические задачи по коллекциям Kotlin
