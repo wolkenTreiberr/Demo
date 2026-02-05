@@ -223,7 +223,7 @@ class Triangle(val base: Double, val height: Double) : Shape()
 
 fun task6() {
     fun area(shape: Shape): Double = when(shape) {
-        is Circle -> 3.14 * shape.radius.pow(2)
+        is Circle -> Math.PI * shape.radius.pow(2)
         is Rectangle -> shape.width * shape.height
         is Triangle -> (shape.base * shape.height) / 2
     }
@@ -274,7 +274,7 @@ fun processData(data: Any): String {
     val result = when(data) {
         is String -> data.uppercase()
         is Int -> data.toString()
-        is Boolean -> "true"
+        is Boolean -> data.toString()
         else -> "unknown"
     }
     return result
