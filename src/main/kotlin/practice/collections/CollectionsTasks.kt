@@ -588,6 +588,13 @@ fun task7_1() {
         Project("Data Pipeline", listOf("Kotlin", "Kafka", "PostgreSQL"))
     )
 
+    val allTechnologies = projects.flatMap { it.technologies }
+    val noDuplicates = allTechnologies.distinct()
+    //or
+    val noDuplicates2 = allTechnologies.toSet().toList()
+    val commonTechnologies = noDuplicates.filter { technology -> projects.count { technology in it.technologies } > 1 }
+    println(commonTechnologies)
+
     // TODO:
     // 1. flatMap — получи все технологии (с повторами)
     // 2. Из результата — уникальные технологии
@@ -722,7 +729,7 @@ fun main() {
 //     task6_3()
 
     // ФУНКЦИОНАЛЬНЫЕ ОПЕРАЦИИ (flatMap, reduce, fold, zip)
-//     task7_1()
+     task7_1()
 //     task7_2()
 //     task7_3()
 //     task7_4()
