@@ -1,5 +1,7 @@
 package practice.control_flow
 
+import kotlin.math.pow
+
 /**
  * Практические задачи по управляющим конструкциям Kotlin
  *
@@ -33,13 +35,15 @@ fun task1() {
     val temperature = 35
 
     // TODO: замени код ниже на if-expression (одна строка: val result = ...)
-    var result: String
-    if (temperature > 30) {
-        result = "Жарко"
-    } else {
-        result = "Нормально"
-    }
+//    var result: String
+//    if (temperature > 30) {
+//        result = "Жарко"
+//    } else {
+//        result = "Нормально"
+//    }
 
+
+    var result = if(temperature > 30) "Жарко" else "Нормально"
     println(result)
 
     // Ожидаемый вывод:
@@ -60,15 +64,22 @@ fun task2() {
     val code = 404
 
     // TODO: замени код ниже на when-expression
-    val message: String
-    if (code == 200) {
-        message = "OK"
-    } else if (code == 404) {
-        message = "Not Found"
-    } else if (code == 500) {
-        message = "Server Error"
-    } else {
-        message = "Unknown"
+//    val message: String
+//    if (code == 200) {
+//        message = "OK"
+//    } else if (code == 404) {
+//        message = "Not Found"
+//    } else if (code == 500) {
+//        message = "Server Error"
+//    } else {
+//        message = "Unknown"
+//    }
+
+    val message = when(code) {
+        202 -> "OK"
+        404 -> "Not Found"
+        500 -> "Server Error"
+        else -> "Unknown"
     }
 
     println(message)
@@ -98,6 +109,12 @@ fun task2() {
 // TODO: напиши функцию describe(input: Any): String
 
 fun task3() {
+    fun describe(input: Any): String = when(input) {
+        is Int -> "Целое число: $input"
+        is String -> "Строка длиной ${input.length}"
+        is Boolean -> "Логическое: $input"
+        else -> "Неизвестный тип"
+    }
     // После реализации describe() раскомментируй:
     // println(describe(42))
     // println(describe("Kotlin"))
@@ -127,9 +144,10 @@ fun task3() {
 class Container(var value: Any?) {
     fun printIfString() {
         // TODO: этот код не скомпилируется — исправь его
-        // if (value is String) {
-        //     println(value.length)
-        // }
+        val value2 = value
+         if (value2 is String) {
+             println(value2.length)
+         }
     }
 }
 
@@ -161,6 +179,13 @@ fun task4() {
 // TODO: напиши функцию classify(score: Int): String
 
 fun task5() {
+    fun classify(score: Int): String = when(score) {
+        in 90..100 -> "Отлично"
+        in 75..89 -> "Хорошо"
+        in 60..74 -> "Удовлетворительно"
+        in 0..59 -> "Неудовлетворительно"
+        else -> "Ошибка: некорректная оценка"
+    }
     // После реализации classify() раскомментируй:
     // println(classify(95))
     // println(classify(82))
@@ -197,10 +222,15 @@ class Triangle(val base: Double, val height: Double) : Shape()
 // TODO: напиши функцию area(shape: Shape): Double
 
 fun task6() {
+    fun area(shape: Shape): Double = when(shape) {
+        is Circle -> Math.PI * shape.radius.pow(2)
+        is Rectangle -> shape.width * shape.height
+        is Triangle -> (shape.base * shape.height) / 2
+    }
     // После реализации area() раскомментируй:
-    // println("Круг: ${area(Circle(5.0))}")
-    // println("Прямоугольник: ${area(Rectangle(4.0, 6.0))}")
-    // println("Треугольник: ${area(Triangle(3.0, 8.0))}")
+//     println("Круг: ${area(Circle(5.0))}")
+//     println("Прямоугольник: ${area(Rectangle(4.0, 6.0))}")
+//     println("Треугольник: ${area(Triangle(3.0, 8.0))}")
 
     // Ожидаемый вывод:
     // Круг: 78.53981633974483
@@ -225,19 +255,27 @@ fun task6() {
  */
 fun processData(data: Any): String {
     // TODO: перепиши этот код — исправь все антипаттерны
-    val result: String
-    if (data is String) {
-        result = (data as String).uppercase()
-    } else if (data is Int) {
-        result = (data as Int).toString()
-    } else if (data is Boolean) {
-        if (data as Boolean) {
-            result = "true"
-        } else {
-            result = "false"
-        }
-    } else {
-        result = "unknown"
+//    val result: String
+//    if (data is String) {
+//        result = (data as String).uppercase()
+//    } else if (data is Int) {
+//        result = (data as Int).toString()
+//    } else if (data is Boolean) {
+//        if (data as Boolean) {
+//            result = "true"
+//        } else {
+//            result = "false"
+//        }
+//    } else {
+//        result = "unknown"
+//    }
+//    return result
+
+    val result = when(data) {
+        is String -> data.uppercase()
+        is Int -> data.toString()
+        is Boolean -> data.toString()
+        else -> "unknown"
     }
     return result
 }
@@ -281,12 +319,13 @@ fun task8() {
     // val f = mapOf("key" to 1)
 
     // Ответь в комментариях:
-    // a — ?
-    // b — ?
-    // c — ?
-    // d — ?
-    // e — ?
-    // f — ?
+    // a — нет. котлин сам определяет тип Int
+    // b — да, так как переменная объявлена сейчас, а значение будет присвоено позже
+    // c — нет, так как переменная объявлена и ей присвоено значение - емптиЛист чисел сразу
+    // d — нет, так как это фанкшн експрешн - котлин видит тип возвращаемого значения
+    // e — да, так как это обычная функция, то ей нужно явно указывать тип возвращаемого значения, иначе по-умолчанию функция без
+    // указания типа имеет тип Unit - что значит что эта функция ничего не возвращает
+    // f — нет, так как переменной сразу присваивается значение - мапа с парой key: 1
 }
 
 
@@ -313,10 +352,10 @@ fun main() {
     // task5()
 
     // EXHAUSTIVE WHEN + SEALED CLASS
-    // task6()
+//     task6()
 
     // АНТИПАТТЕРНЫ
-    // task7()
+//     task7()
 
     // TYPE INFERENCE
     // task8()
