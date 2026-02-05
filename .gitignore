@@ -43,6 +43,7 @@ bin/
 .DS_Store
 
 ### Claude Code ###
+.claude
 tmpclaude-*
 /temp/
 /bp-property-catalog/.env
