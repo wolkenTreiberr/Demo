@@ -667,6 +667,17 @@ fun task7_3() {
     // 2. fold в Pair(доходы, расходы) — начальное Pair(0.0, 0.0)
     // 3. fold в строку — выписка вида "Зарплата: +50000.0 | Аренда: -15000.0 | ..."
 
+    val totalBalance = transactions.fold(initialBalance) { acc, transaction -> acc + transaction.amount }
+    val (income, expenses) = transactions.fold(Pair(0.0, 0.0)) {(inc, exp), transaction ->
+        if(transaction.amount > 0) Pair(inc + transaction.amount, exp)
+        else Pair(inc, exp + transaction.amount)
+    }
+    val string = transactions.fold("") { str, transaction ->
+        val sign = if(transaction.amount > 0) "+" else ""
+        val result = "${transaction.description} : $sign${transaction.amount}"
+        if(str.isEmpty()) result else "$str | $result"
+    }
+
     // Ожидаемый вывод:
     // Финальный баланс: 50300.0
     // Доходы: 62000.0, Расходы: -21700.0
@@ -738,7 +749,7 @@ fun main() {
 
     // ФУНКЦИОНАЛЬНЫЕ ОПЕРАЦИИ (flatMap, reduce, fold, zip)
 //     task7_1()
-     task7_2()
-//     task7_3()
+//     task7_2()
+     task7_3()
 //     task7_4()
 }
