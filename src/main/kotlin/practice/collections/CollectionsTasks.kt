@@ -628,6 +628,14 @@ fun task7_2() {
     // 2. reduce на именах — склей в маршрут "Москва -> Санкт-Петербург -> ..."
     // 3. reduce — суммарное население (map + reduce)
 
+    val largestCity = cities.reduce { acc, city ->
+        if(city.population > acc.population) city else acc
+    }
+
+    val route = cities.map {it.name}.reduce { acc, city -> "$acc -> $city" }
+
+    val commonPopulation = cities.map { it.population }.reduce { acc, population -> acc + population }
+
     // Ожидаемый вывод:
     // Крупнейший город: Москва (13000000)
     // Маршрут: Москва -> Санкт-Петербург -> Новосибирск -> Екатеринбург
@@ -729,8 +737,8 @@ fun main() {
 //     task6_3()
 
     // ФУНКЦИОНАЛЬНЫЕ ОПЕРАЦИИ (flatMap, reduce, fold, zip)
-     task7_1()
-//     task7_2()
+//     task7_1()
+     task7_2()
 //     task7_3()
 //     task7_4()
 }
