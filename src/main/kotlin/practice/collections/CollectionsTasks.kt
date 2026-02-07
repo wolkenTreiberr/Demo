@@ -703,7 +703,16 @@ fun task7_4() {
     // 3. Найди студента с лучшей оценкой
     // 4. Попробуй zip с коротким списком — что получится?
 
+    val zipped = students.zip(grades)
+    val whoPassed = zipped.filter { it.second >= 60 }
+    val bestStudent = whoPassed.reduce { acc, currentStudent ->
+        if(currentStudent.second > acc.second) currentStudent else acc
+    }
+
     val shortGrades = listOf(100, 55, 73) // для п.4
+
+    val shortZipped = students.zip(shortGrades)
+    // Если список оценок меньше списка студентов, то объединяются возможные пары, остальные элементы игнорируются
 
     // Ожидаемый вывод:
     // Все результаты: [(Алиса, 85), (Борис, 42), (Вика, 91), (Григорий, 60), (Дана, 78)]
@@ -750,6 +759,6 @@ fun main() {
     // ФУНКЦИОНАЛЬНЫЕ ОПЕРАЦИИ (flatMap, reduce, fold, zip)
 //     task7_1()
 //     task7_2()
-     task7_3()
-//     task7_4()
+//     task7_3()
+     task7_4()
 }
