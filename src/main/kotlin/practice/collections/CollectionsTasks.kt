@@ -592,7 +592,15 @@ fun task7_1() {
     val noDuplicates = allTechnologies.distinct()
     //or
     val noDuplicates2 = allTechnologies.toSet().toList()
-    val commonTechnologies = noDuplicates.filter { technology -> projects.count { technology in it.technologies } > 1 }
+    val commonTechnologies = noDuplicates
+        .filter { technology -> projects.count { technology in it.technologies } > 1 }
+
+//    val commonTechnologies2 = allTechnologies
+//        .groupBy { it }
+//        .filter { (_, occurrences) -> occurrences.size > 1 }
+//        .keys
+//        .toList()
+
     println(commonTechnologies)
 
     // TODO:
@@ -629,12 +637,17 @@ fun task7_2() {
     // 3. reduce — суммарное население (map + reduce)
 
     val largestCity = cities.reduce { acc, city ->
+        println(acc)
         if(city.population > acc.population) city else acc
     }
 
-    val route = cities.map {it.name}.reduce { acc, city -> "$acc -> $city" }
+    val route = cities
+        .map {it.name}
+        .reduce { acc, city -> "$acc -> $city" }
 
-    val commonPopulation = cities.map { it.population }.reduce { acc, population -> acc + population }
+    val commonPopulation = cities
+        .map { it.population }
+        .reduce { acc, population -> acc + population }
 
     // Ожидаемый вывод:
     // Крупнейший город: Москва (13000000)
@@ -667,12 +680,15 @@ fun task7_3() {
     // 2. fold в Pair(доходы, расходы) — начальное Pair(0.0, 0.0)
     // 3. fold в строку — выписка вида "Зарплата: +50000.0 | Аренда: -15000.0 | ..."
 
-    val totalBalance = transactions.fold(initialBalance) { acc, transaction -> acc + transaction.amount }
-    val (income, expenses) = transactions.fold(Pair(0.0, 0.0)) {(inc, exp), transaction ->
+    val totalBalance = transactions
+        .fold(initialBalance) { acc, transaction -> acc + transaction.amount }
+    val (income, expenses) = transactions
+        .fold(Pair(0.0, 0.0)) {(inc, exp), transaction ->
         if(transaction.amount > 0) Pair(inc + transaction.amount, exp)
         else Pair(inc, exp + transaction.amount)
     }
-    val string = transactions.fold("") { str, transaction ->
+    val string = transactions
+        .fold("") { str, transaction ->
         val sign = if(transaction.amount > 0) "+" else ""
         val result = "${transaction.description} : $sign${transaction.amount}"
         if(str.isEmpty()) result else "$str | $result"
@@ -705,6 +721,7 @@ fun task7_4() {
 
     val zipped = students.zip(grades)
     val whoPassed = zipped.filter { it.second >= 60 }
+//    val whoPassed2 = zipped.filter { (_, grade) -> grade >= 60 }      - ДЕСТРУКТУРИЗАЦИЯ
     val bestStudent = whoPassed.reduce { acc, currentStudent ->
         if(currentStudent.second > acc.second) currentStudent else acc
     }
@@ -760,5 +777,5 @@ fun main() {
 //     task7_1()
 //     task7_2()
 //     task7_3()
-     task7_4()
+//     task7_4()
 }
