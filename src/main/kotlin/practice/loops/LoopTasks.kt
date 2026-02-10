@@ -29,6 +29,10 @@ fun task1() {
 
     // TODO: выведи таблицу умножения для number
 
+    for(currentNumber in 1..10){
+        println("$number * $currentNumber = ${number * currentNumber}")
+    }
+
     // Ожидаемый вывод:
     // 7 x 1 = 7
     // 7 x 2 = 14
@@ -302,7 +306,7 @@ fun main() {
     println("=== Запусти нужную задачу, раскомментировав её ===")
 
     // FOR + RANGES
-    // task1()
+     task1()
 
     // FOR + ОБРАТНЫЙ ПОРЯДОК
     // task2()
