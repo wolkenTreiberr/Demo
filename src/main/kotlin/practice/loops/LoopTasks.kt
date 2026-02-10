@@ -55,6 +55,10 @@ fun task1() {
 fun task2() {
     // TODO: обратный отсчёт от 10 до 0 с шагом 2
 
+    for(currentNumber in 10 downTo 0 step 2){
+        println(currentNumber)
+    }
+
     // Ожидаемый вывод:
     // 10 8 6 4 2 0
 }
@@ -306,10 +310,10 @@ fun main() {
     println("=== Запусти нужную задачу, раскомментировав её ===")
 
     // FOR + RANGES
-     task1()
+//     task1()
 
     // FOR + ОБРАТНЫЙ ПОРЯДОК
-    // task2()
+     task2()
 
     // FOR + WITHINDEX
     // task3()
