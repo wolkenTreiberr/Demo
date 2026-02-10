@@ -111,6 +111,10 @@ fun task4() {
 
     // TODO: выведи каждую пару в формате "КЛЮЧ = значение"
 
+    for((key, value) in config) {
+        println("${key.uppercase()} = $value")
+    }
+
     // Ожидаемый вывод:
     // HOST = localhost
     // PORT = 8080
@@ -320,10 +324,10 @@ fun main() {
 //     task2()
 
     // FOR + WITHINDEX
-     task3()
+//     task3()
 
     // FOR + ДЕСТРУКТУРИЗАЦИЯ
-    // task4()
+     task4()
 
     // WHILE
     // task5()
