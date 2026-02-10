@@ -79,6 +79,10 @@ fun task3() {
 
     // TODO: выведи каждый город с номером
 
+    for((index, name) in cities.withIndex()) {
+        println("${index + 1}. $name")
+    }
+
     // Ожидаемый вывод:
     // 1. Москва
     // 2. Берлин
@@ -313,10 +317,10 @@ fun main() {
 //     task1()
 
     // FOR + ОБРАТНЫЙ ПОРЯДОК
-     task2()
+//     task2()
 
     // FOR + WITHINDEX
-    // task3()
+     task3()
 
     // FOR + ДЕСТРУКТУРИЗАЦИЯ
     // task4()
