@@ -141,14 +141,15 @@ fun task5() {
     // TODO: используй while (не for!) для перебора попыток
     var counter = 0
 
-    while(true) {
+    while(counter < guesses.size) {
         val currentNumber = guesses[counter]
+        ++counter
         if(currentNumber < secret) {
-            println("Попытка ${++counter}: $currentNumber - слишком маленькое")
+            println("Попытка ${counter}: $currentNumber - слишком маленькое")
         } else if(currentNumber > secret) {
-            println("Попытка ${++counter}: $currentNumber - слишком большое")
+            println("Попытка ${counter}: $currentNumber - слишком большое")
         } else {
-            println("Попытка ${++counter}: Угадал с $counter попытки!")
+            println("Попытка ${counter}: Угадал с $counter попытки!")
             break
         }
     }
@@ -181,14 +182,16 @@ fun task6() {
 
     do {
         val currentNumber = rolls[counter]
+        ++counter
+
         if(currentNumber != 6) {
-            println("Бросок ${++counter}: $currentNumber")
+            println("Бросок ${counter}: $currentNumber")
         } else {
-            println("Бросок ${++counter}: $currentNumber - Готово!")
-            println("Всего бросков: $counter")
-            break
+            println("Бросок ${counter}: $currentNumber - Готово!")
         }
-    } while (true)
+    } while (currentNumber != 6 && counter < rolls.size)
+
+            println("Всего бросков: $counter")
 
     // Ожидаемый вывод:
     // Бросок 1: 3
@@ -234,6 +237,14 @@ fun task7() {
         }
     }
 
+    // вариант 2
+
+    for(log in logs) {
+        if(log.startsWith("DEBUG: ")) continue
+        if(log.startsWith("FATAL: ")) break
+        println(log)
+    }
+
     // Ожидаемый вывод:
     // INFO: Сервер запущен
     // WARN: Мало памяти
@@ -261,10 +272,10 @@ fun task8() {
 
     // TODO: найди 42 в матрице, выведи позицию, выйди из обоих циклов
 
-    outer@ for((line, currentMatrix) in matrix.withIndex()) {
-        for((column, number) in currentMatrix.withIndex()) {
+    outer@ for((row, currentMatrixElem) in matrix.withIndex()) {
+        for((column, number) in currentMatrixElem.withIndex()) {
             if(number == 42) {
-                println("Найдено 42 на позиции: строка $line, столбец $column")
+                println("Найдено 42 на позиции: строка $row, столбец $column")
                 break@outer
             }
         }
@@ -354,17 +365,27 @@ fun task10() {
     val list2 = listOf(2, 3, 7, 10, 11, 15)
 
     // Текущая реализация O(n^2) — перепиши:
-    val common = mutableListOf<Int>()
-    for (a in list1) {
-        for (b in list2) {
-            if (a == b) common.add(a)
-        }
-    }
-    println("Общие элементы: $common")
+//    val common = mutableListOf<Int>()
+//    for (a in list1) {
+//        for (b in list2) {
+//            if (a == b) common.add(a)
+//        }
+//    }
 
 
     val common2 = list1.intersect(list2)
     println(common2)
+
+    // intersect - убирает дубликаты
+    // вариант 2
+
+    val set2 = list2.toSet()
+    println(set2)
+    val common3 = list1.filter { it in set2 }
+
+    println("Общие элементы: $common3")
+
+    // filter - оставляет дубликаты
 
     // Ожидаемый вывод:
     // Общие элементы: [3, 7, 11]
