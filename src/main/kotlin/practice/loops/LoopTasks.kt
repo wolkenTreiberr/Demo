@@ -362,6 +362,10 @@ fun task10() {
     }
     println("Общие элементы: $common")
 
+
+    val common2 = list1.intersect(list2)
+    println(common2)
+
     // Ожидаемый вывод:
     // Общие элементы: [3, 7, 11]
 }
@@ -399,8 +403,8 @@ fun main() {
 //     task8()
 
     // АНТИПАТТЕРНЫ
-     task9()
+//     task9()
 
     // СЛОЖНОСТЬ
-    // task10()
+     task10()
 }
