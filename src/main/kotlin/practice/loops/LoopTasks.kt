@@ -224,6 +224,16 @@ fun task7() {
 
     // TODO: перебери логи с continue для DEBUG и break для FATAL
 
+    val logsMap = logs.map { it.split(": ") }
+
+    for((name, msg) in logsMap) {
+        when(name) {
+            "DEBUG" -> continue
+            "FATAL" -> break
+            else -> println("$name: $msg")
+        }
+    }
+
     // Ожидаемый вывод:
     // INFO: Сервер запущен
     // WARN: Мало памяти
@@ -359,10 +369,10 @@ fun main() {
 //     task5()
 
     // DO-WHILE
-     task6()
+//     task6()
 
     // BREAK + CONTINUE
-    // task7()
+     task7()
 
     // LABELS
     // task8()
