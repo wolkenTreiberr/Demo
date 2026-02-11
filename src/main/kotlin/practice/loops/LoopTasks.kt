@@ -261,6 +261,15 @@ fun task8() {
 
     // TODO: найди 42 в матрице, выведи позицию, выйди из обоих циклов
 
+    outer@ for((line, currentMatrix) in matrix.withIndex()) {
+        for((column, number) in currentMatrix.withIndex()) {
+            if(number == 42) {
+                println("Найдено 42 на позиции: строка $line, столбец $column")
+                break@outer
+            }
+        }
+    }
+
     // Ожидаемый вывод:
     // Найдено 42 на позиции: строка 1, столбец 1
 }
@@ -372,10 +381,10 @@ fun main() {
 //     task6()
 
     // BREAK + CONTINUE
-     task7()
+//     task7()
 
     // LABELS
-    // task8()
+     task8()
 
     // АНТИПАТТЕРНЫ
     // task9()
