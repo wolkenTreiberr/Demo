@@ -139,6 +139,19 @@ fun task5() {
     val guesses = listOf(10, 50, 30, 42, 99)
 
     // TODO: используй while (не for!) для перебора попыток
+    var counter = 0
+
+    while(true) {
+        val currentNumber = guesses[counter]
+        if(currentNumber < secret) {
+            println("Попытка ${++counter}: $currentNumber - слишком маленькое")
+        } else if(currentNumber > secret) {
+            println("Попытка ${++counter}: $currentNumber - слишком большое")
+        } else {
+            println("Попытка ${++counter}: Угадал с $counter попытки!")
+            break
+        }
+    }
 
     // Ожидаемый вывод:
     // Попытка 1: 10 — слишком маленькое
@@ -327,10 +340,10 @@ fun main() {
 //     task3()
 
     // FOR + ДЕСТРУКТУРИЗАЦИЯ
-     task4()
+//     task4()
 
     // WHILE
-    // task5()
+     task5()
 
     // DO-WHILE
     // task6()
