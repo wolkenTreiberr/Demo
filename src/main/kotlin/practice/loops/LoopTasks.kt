@@ -177,6 +177,19 @@ fun task6() {
 
     // TODO: используй do-while для перебора бросков до первой 6
 
+    var counter = 0
+
+    do {
+        val currentNumber = rolls[counter]
+        if(currentNumber != 6) {
+            println("Бросок ${++counter}: $currentNumber")
+        } else {
+            println("Бросок ${++counter}: $currentNumber - Готово!")
+            println("Всего бросков: $counter")
+            break
+        }
+    } while (true)
+
     // Ожидаемый вывод:
     // Бросок 1: 3
     // Бросок 2: 1
@@ -343,10 +356,10 @@ fun main() {
 //     task4()
 
     // WHILE
-     task5()
+//     task5()
 
     // DO-WHILE
-    // task6()
+     task6()
 
     // BREAK + CONTINUE
     // task7()
