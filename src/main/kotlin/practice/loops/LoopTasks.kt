@@ -297,6 +297,10 @@ fun task9() {
         println(names[i])
     }
 
+    for(name in names) {
+        println(name)
+    }
+
     // Антипаттерн 2: ручной счётчик
     // TODO: перепиши через for
     var j = 10
@@ -306,8 +310,16 @@ fun task9() {
     }
     println()
 
+    for(number in j downTo 0 step 2) {
+        println(number)
+    }
+
     // Антипаттерн 3: модификация во время итерации
     // TODO: перепиши безопасно (filter или MutableIterator)
+
+    val scoresMoreThan50 = scores.filter { it >= 50 }
+    println(scoresMoreThan50)
+
     // ВНИМАНИЕ: этот код упадёт с ConcurrentModificationException!
     // for (score in scores) {
     //     if (score < 50) scores.remove(score)
@@ -384,10 +396,10 @@ fun main() {
 //     task7()
 
     // LABELS
-     task8()
+//     task8()
 
     // АНТИПАТТЕРНЫ
-    // task9()
+     task9()
 
     // СЛОЖНОСТЬ
     // task10()
