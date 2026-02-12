@@ -23,7 +23,7 @@
 - let с null check
 
 ### 3. Control Flow
-> [Теория](src/main/kotlin/practice/control_flow/Управляющие%20конструкции.md) | [Задания](src/main/kotlin/practice/control_flow/ControlFlowTasks.kt)
+> [Теория](src/main/kotlin/practice/controlflow/Управляющие%20конструкции.md) | [Задания](src/main/kotlin/practice/controlflow/ControlFlowTasks.kt)
 
 - if / else (statement + expression)
 - when (statement + expression)
@@ -36,6 +36,8 @@
 - break / continue
 
 ### 5. Функции
+> [Теория](src/main/kotlin/practice/functions/Функции.md) | [Задания](src/main/kotlin/practice/functions/FunctionsTasks.kt)
+
 - Parameters, return types, default values, named arguments
 - Single expression functions
 - Unit
