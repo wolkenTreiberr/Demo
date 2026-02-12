@@ -1,6 +1,6 @@
 package practice.collections
 
-/**
+/*
  * Практические задачи по коллекциям Kotlin
  *
  * Структура:
@@ -25,14 +25,14 @@ package practice.collections
  */
 data class Order(val id: Int, val amount: Double, val isPaid: Boolean)
 
-fun task1_1() {
+fun task11() {
     val orders = listOf(
         Order(1, 1500.0, true),
         Order(2, 300.0, false),
         Order(3, 8900.0, true),
         Order(4, 2200.0, true),
         Order(5, 500.0, false),
-        Order(6, 4100.0, true)
+        Order(6, 4100.0, true),
     )
 
     // TODO: твой код здесь
@@ -67,13 +67,13 @@ fun task1_1() {
  */
 data class User(val name: String, val age: Int)
 
-fun task1_2() {
+fun task12() {
     val users = listOf(
         User("Алексей", 25),
         User("Мария", 17),
         User("Иван", 32),
         User("Анна", 16),
-        User("Дмитрий", 19)
+        User("Дмитрий", 19),
     )
 
     // TODO: твой код здесь
@@ -102,13 +102,13 @@ fun task1_2() {
  */
 data class Product(val name: String, val price: Double)
 
-fun task1_3() {
+fun task13() {
     val products = listOf(
         Product("Ноутбук", 75000.0),
         Product("Мышь", 1500.0),
         Product("Клавиатура", 3000.0),
         Product("Монитор", 25000.0),
-        Product("Наушники", 800.0)
+        Product("Наушники", 800.0),
     )
 
     // TODO: твой код здесь
@@ -127,7 +127,6 @@ fun task1_3() {
     // Есть товары дешевле 1000: true
 }
 
-
 // ============================================================================
 // 2. MUTABLELIST
 // ============================================================================
@@ -141,7 +140,7 @@ fun task1_3() {
  * 3. Добавь ещё один товар в начало списка
  * 4. Выведи итоговую корзину с номерами позиций
  */
-fun task2_1() {
+fun task21() {
     val cart = mutableListOf<String>()
     val products = listOf("Молоко", "Хлеб", "Сыр")
 
@@ -154,7 +153,7 @@ fun task2_1() {
 //    cart.removeAt(1)
     cart.remove("Хлеб")
     cart.addFirst("Яйца")
-    cart.forEachIndexed { index, product -> println("${index + 1}: $product")}
+    cart.forEachIndexed { index, product -> println("${index + 1}: $product") }
 
     // Ожидаемый вывод:
     // Корзина:
@@ -174,11 +173,11 @@ fun task2_1() {
  */
 data class Task(val id: Int, val title: String, val priority: String)
 
-fun task2_2() {
+fun task22() {
     val taskQueue = mutableListOf(
         Task(1, "Ревью кода", "medium"),
         Task(2, "Написать тесты", "low"),
-        Task(3, "Фикс бага", "high")
+        Task(3, "Фикс бага", "high"),
     )
 
     // TODO:
@@ -194,14 +193,12 @@ fun task2_2() {
         taskQueue[index] = Task(6, "Документация API", "medium")
     }
 
-
     // Ожидаемый вывод:
     // Очередь задач:
     // [CRITICAL] Срочный деплой
     // [HIGH] Фикс бага
     // [MEDIUM] Документация API
 }
-
 
 // ============================================================================
 // 3. SET (Read-only)
@@ -215,7 +212,7 @@ fun task2_2() {
  * 2. Есть ли хотя бы одна из ролей: MODERATOR или ADMIN
  * 3. Сколько общих ролей с другим пользователем
  */
-fun task3_1() {
+fun task31() {
     val userRoles = setOf("USER", "EDITOR", "MODERATOR")
     val requiredRoles = setOf("ADMIN", "MODERATOR")
     val otherUserRoles = setOf("USER", "VIEWER")
@@ -231,7 +228,6 @@ fun task3_1() {
     val bothHaveRoles = userRoles.count { it in otherUserRoles }
     val bothHaveRoles2 = userRoles.intersect(requiredRoles).size
 
-
     // Ожидаемый вывод:
     // Является админом: false
     // Имеет права модерации: true
@@ -246,7 +242,7 @@ fun task3_1() {
  * 2. Найти теги, которые есть в обоих источниках
  * 3. Найти теги, уникальные для первого источника
  */
-fun task3_2() {
+fun task32() {
     val blogTags = setOf("kotlin", "android", "mobile", "jetpack")
     val articleTags = setOf("kotlin", "backend", "spring", "android")
 
@@ -271,7 +267,6 @@ fun task3_2() {
     // Только в блоге: [mobile, jetpack]
 }
 
-
 // ============================================================================
 // 4. MUTABLESET
 // ============================================================================
@@ -284,7 +279,7 @@ fun task3_2() {
  * 2. Выведи текущий список онлайн
  * 3. Проверь, онлайн ли конкретный пользователь
  */
-fun task4_1() {
+fun task41() {
     val onlineUsers = mutableSetOf<String>()
 
     // TODO:
@@ -325,7 +320,7 @@ fun task4_1() {
  * 3. Удалить устаревшие теги
  * 4. Вывести финальный список
  */
-fun task4_2() {
+fun task42() {
     val articleTags = mutableSetOf("java", "programming", "tutorial", "beginner")
 
     // TODO:
@@ -344,7 +339,6 @@ fun task4_2() {
     // Количество тегов: 4
 }
 
-
 // ============================================================================
 // 5. MAP (Read-only)
 // ============================================================================
@@ -357,12 +351,12 @@ fun task4_2() {
  * 2. Проверить наличие настройки
  * 3. Вывести все ключи
  */
-fun task5_1() {
+fun task51() {
     val config = mapOf(
         "app.name" to "MyApp",
         "app.version" to "1.0.0",
         "db.host" to "localhost",
-        "db.port" to "5432"
+        "db.port" to "5432",
     )
 
     // TODO:
@@ -374,7 +368,7 @@ fun task5_1() {
     println("Имя приложения: ${config["app.name"]}")
     println("Имя приложения: ${config["app.name"]}")
     println("Режим отладки: ${config["app.debug"] ?: "false"}")
-    println("Режим отладки: ${config["app.debug"] ?:  "false"}")
+    println("Режим отладки: ${config["app.debug"] ?: "false"}")
     println("Пароль БД задан: ${config.contains("db.password")}")
     println("Пароль БД задан: ${"db.password" in config}")
     println("Все настройки: ${config.keys}")
@@ -395,19 +389,19 @@ fun task5_1() {
  */
 data class Employee(val id: Int, val name: String, val department: String)
 
-fun task5_2() {
+fun task52() {
     val employees = listOf(
         Employee(1, "Иван", "IT"),
         Employee(2, "Мария", "HR"),
         Employee(3, "Пётр", "IT"),
         Employee(4, "Анна", "HR"),
-        Employee(5, "Сергей", "Sales")
+        Employee(5, "Сергей", "Sales"),
     )
 
     // TODO: твой код здесь
 
     val employeeMapById = employees.associateBy({ it.id }, { it.name })
-    val employeeMapByDep = employees.groupBy({it.department}, {it.name})
+    val employeeMapByDep = employees.groupBy({ it.department }, { it.name })
 
     println("Сотрудник с ID=3: ${employeeMapById[3]}")
     println("Сотрудники IT отдела: ${employeeMapByDep["IT"]}")
@@ -426,12 +420,12 @@ fun task5_2() {
  * 1. Переведи несколько слов
  * 2. Обработай отсутствующий перевод
  */
-fun task5_3() {
+fun task53() {
     val dictionary = mapOf(
         "hello" to "привет",
         "world" to "мир",
         "kotlin" to "котлин",
-        "code" to "код"
+        "code" to "код",
     )
 
     val wordsToTranslate = listOf("hello", "world", "java", "code")
@@ -439,7 +433,7 @@ fun task5_3() {
     // TODO: переведи каждое слово, если перевода нет — выведи "[нет перевода]"
 
     wordsToTranslate.forEach {
-        println("$it -> ${dictionary[it]?:"[нет перевода]"}")
+        println("$it -> ${dictionary[it] ?: "[нет перевода]"}")
     }
 
     // Ожидаемый вывод:
@@ -448,7 +442,6 @@ fun task5_3() {
     // java -> [нет перевода]
     // code -> код
 }
-
 
 // ============================================================================
 // 6. MUTABLEMAP
@@ -459,7 +452,7 @@ fun task5_3() {
  *
  * Подсчитай частоту слов в тексте
  */
-fun task6_1() {
+fun task61() {
     val words = listOf("kotlin", "java", "kotlin", "python", "kotlin", "java")
 //    val wordCount = mutableMapOf<String, Int>()
 
@@ -492,7 +485,7 @@ fun task6_1() {
  */
 data class UserProfile(val id: Int, val name: String, val email: String)
 
-fun task6_2() {
+fun task62() {
     val userCache = mutableMapOf<Int, UserProfile>()
 
     // TODO:
@@ -531,14 +524,14 @@ fun task6_2() {
  */
 data class Sale(val category: String, val amount: Double)
 
-fun task6_3() {
+fun task63() {
     val sales = listOf(
         Sale("Electronics", 15000.0),
         Sale("Books", 500.0),
         Sale("Electronics", 8000.0),
         Sale("Clothing", 3000.0),
         Sale("Books", 1200.0),
-        Sale("Electronics", 22000.0)
+        Sale("Electronics", 22000.0),
     )
 
     val salesByCategory = mutableMapOf<String, Double>()
@@ -565,7 +558,6 @@ fun task6_3() {
     // Clothing: 3000.0
 }
 
-
 // ============================================================================
 // 7. ФУНКЦИОНАЛЬНЫЕ ОПЕРАЦИИ (flatMap, reduce, fold, zip)
 // ============================================================================
@@ -580,12 +572,12 @@ fun task6_3() {
  */
 data class Project(val name: String, val technologies: List<String>)
 
-fun task7_1() {
+fun task71() {
     val projects = listOf(
         Project("Backend API", listOf("Kotlin", "Spring", "PostgreSQL", "Redis")),
         Project("Mobile App", listOf("Kotlin", "Android", "Room")),
         Project("Web Frontend", listOf("TypeScript", "React", "Redis")),
-        Project("Data Pipeline", listOf("Kotlin", "Kafka", "PostgreSQL"))
+        Project("Data Pipeline", listOf("Kotlin", "Kafka", "PostgreSQL")),
     )
 
     val allTechnologies = projects.flatMap { it.technologies }
@@ -623,12 +615,12 @@ fun task7_1() {
  */
 data class City(val name: String, val population: Int)
 
-fun task7_2() {
+fun task72() {
     val cities = listOf(
         City("Москва", 13_000_000),
         City("Санкт-Петербург", 5_600_000),
         City("Новосибирск", 1_600_000),
-        City("Екатеринбург", 1_500_000)
+        City("Екатеринбург", 1_500_000),
     )
 
     // TODO:
@@ -665,14 +657,14 @@ fun task7_2() {
  */
 data class Transaction(val description: String, val amount: Double)
 
-fun task7_3() {
+fun task73() {
     val initialBalance = 10_000.0
     val transactions = listOf(
         Transaction("Зарплата", 50_000.0),
         Transaction("Аренда", -15_000.0),
         Transaction("Продукты", -5_500.0),
         Transaction("Фриланс", 12_000.0),
-        Transaction("Кафе", -1_200.0)
+        Transaction("Кафе", -1_200.0),
     )
 
     // TODO:
@@ -709,7 +701,7 @@ fun task7_3() {
  * 3. Найди лучшего студента
  * 4. Что произойдёт, если списки разной длины?
  */
-fun task7_4() {
+fun task74() {
     val students = listOf("Алиса", "Борис", "Вика", "Григорий", "Дана")
     val grades = listOf(85, 42, 91, 60, 78)
 
@@ -738,7 +730,6 @@ fun task7_4() {
     // С коротким списком: [(Алиса, 100), (Борис, 55), (Вика, 73)]
 }
 
-
 // ============================================================================
 // MAIN — запуск всех задач
 // ============================================================================
@@ -747,35 +738,35 @@ fun main() {
     println("=== Запусти нужную задачу, раскомментировав её ===")
 
     // LIST (Read-only)
-//     task1_1()
-    // task1_2()
-    // task1_3()
+//     task11()
+    // task12()
+    // task13()
 
     // MUTABLELIST
-//     task2_1()
-    // task2_2()
+//     task21()
+    // task22()
 
     // SET (Read-only)
-    // task3_1()
-    // task3_2()
+    // task31()
+    // task32()
 
     // MUTABLESET
-//     task4_1()
-//     task4_2()
+//     task41()
+//     task42()
 
     // MAP (Read-only)
-//     task5_1()
-//     task5_2()
-//     task5_3()
+//     task51()
+//     task52()
+//     task53()
 
     // MUTABLEMAP
-//     task6_1()
-//     task6_2()
-//     task6_3()
+//     task61()
+//     task62()
+//     task63()
 
     // ФУНКЦИОНАЛЬНЫЕ ОПЕРАЦИИ (flatMap, reduce, fold, zip)
-//     task7_1()
-//     task7_2()
-//     task7_3()
-//     task7_4()
+//     task71()
+//     task72()
+//     task73()
+//     task74()
 }

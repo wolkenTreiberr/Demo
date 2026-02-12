@@ -1,5 +1,8 @@
+import org.gradle.kotlin.dsl.named
+
 plugins {
     kotlin("jvm") version "1.9.22"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     application
 }
 
@@ -16,6 +19,10 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.named("classes") {
+    dependsOn("ktlintCheck")
 }
 
 kotlin {

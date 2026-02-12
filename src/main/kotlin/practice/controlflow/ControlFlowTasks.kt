@@ -1,8 +1,8 @@
-package practice.control_flow
+package practice.controlflow
 
 import kotlin.math.pow
 
-/**
+/*
  * Практические задачи по управляющим конструкциям Kotlin
  *
  * Темы:
@@ -42,14 +42,12 @@ fun task1() {
 //        result = "Нормально"
 //    }
 
-
-    var result = if(temperature > 30) "Жарко" else "Нормально"
+    var result = if (temperature > 30) "Жарко" else "Нормально"
     println(result)
 
     // Ожидаемый вывод:
     // Жарко
 }
-
 
 // ============================================================================
 // 2. WHEN
@@ -75,7 +73,7 @@ fun task2() {
 //        message = "Unknown"
 //    }
 
-    val message = when(code) {
+    val message = when (code) {
         202 -> "OK"
         404 -> "Not Found"
         500 -> "Server Error"
@@ -88,12 +86,11 @@ fun task2() {
     // Not Found
 }
 
-
 // ============================================================================
 // 3. WHEN + SMART CAST
 // ============================================================================
 
-/**
+/*
  * Задача 3 — Smart cast через when
  *
  * Напишите функцию describe(input: Any): String
@@ -109,7 +106,7 @@ fun task2() {
 // TODO: напиши функцию describe(input: Any): String
 
 fun task3() {
-    fun describe(input: Any): String = when(input) {
+    fun describe(input: Any): String = when (input) {
         is Int -> "Целое число: $input"
         is String -> "Строка длиной ${input.length}"
         is Boolean -> "Логическое: $input"
@@ -128,7 +125,6 @@ fun task3() {
     // Неизвестный тип
 }
 
-
 // ============================================================================
 // 4. SMART CAST — ОГРАНИЧЕНИЯ
 // ============================================================================
@@ -141,13 +137,15 @@ fun task3() {
  * Подсказка: smart cast не работает для var свойств класса.
  * Скопируй value в локальную val-переменную.
  */
-class Container(var value: Any?) {
+class Container(
+    var value: Any?,
+) {
     fun printIfString() {
         // TODO: этот код не скомпилируется — исправь его
         val value2 = value
-         if (value2 is String) {
-             println(value2.length)
-         }
+        if (value2 is String) {
+            println(value2.length)
+        }
     }
 }
 
@@ -159,12 +157,11 @@ fun task4() {
     // 12
 }
 
-
 // ============================================================================
 // 5. WHEN С ДИАПАЗОНАМИ
 // ============================================================================
 
-/**
+/*
  * Задача 5 — Классификация оценки через when с диапазонами
  *
  * Напишите функцию classify(score: Int): String
@@ -179,7 +176,7 @@ fun task4() {
 // TODO: напиши функцию classify(score: Int): String
 
 fun task5() {
-    fun classify(score: Int): String = when(score) {
+    fun classify(score: Int): String = when (score) {
         in 90..100 -> "Отлично"
         in 75..89 -> "Хорошо"
         in 60..74 -> "Удовлетворительно"
@@ -201,7 +198,6 @@ fun task5() {
     // Ошибка: некорректная оценка
 }
 
-
 // ============================================================================
 // 6. EXHAUSTIVE WHEN + SEALED CLASS
 // ============================================================================
@@ -215,14 +211,25 @@ fun task5() {
  * Вопрос: нужен ли else? Почему?
  */
 sealed class Shape
-class Circle(val radius: Double) : Shape()
-class Rectangle(val width: Double, val height: Double) : Shape()
-class Triangle(val base: Double, val height: Double) : Shape()
+
+class Circle(
+    val radius: Double,
+) : Shape()
+
+class Rectangle(
+    val width: Double,
+    val height: Double,
+) : Shape()
+
+class Triangle(
+    val base: Double,
+    val height: Double,
+) : Shape()
 
 // TODO: напиши функцию area(shape: Shape): Double
 
 fun task6() {
-    fun area(shape: Shape): Double = when(shape) {
+    fun area(shape: Shape): Double = when (shape) {
         is Circle -> Math.PI * shape.radius.pow(2)
         is Rectangle -> shape.width * shape.height
         is Triangle -> (shape.base * shape.height) / 2
@@ -237,7 +244,6 @@ fun task6() {
     // Прямоугольник: 24.0
     // Треугольник: 12.0
 }
-
 
 // ============================================================================
 // 7. АНТИПАТТЕРНЫ
@@ -271,7 +277,7 @@ fun processData(data: Any): String {
 //    }
 //    return result
 
-    val result = when(data) {
+    val result = when (data) {
         is String -> data.uppercase()
         is Int -> data.toString()
         is Boolean -> data.toString()
@@ -292,7 +298,6 @@ fun task7() {
     // true
     // unknown
 }
-
 
 // ============================================================================
 // 8. TYPE INFERENCE
@@ -319,7 +324,7 @@ fun task8() {
     // val f = mapOf("key" to 1)
 
     // Ответь в комментариях:
-    // a — нет. котлин сам определяет тип Int
+    // a — нет. Котлин сам определяет тип Int
     // b — да, так как переменная объявлена сейчас, а значение будет присвоено позже
     // c — нет, так как переменная объявлена и ей присвоено значение - емптиЛист чисел сразу
     // d — нет, так как это фанкшн експрешн - котлин видит тип возвращаемого значения
@@ -327,7 +332,6 @@ fun task8() {
     // указания типа имеет тип Unit - что значит что эта функция ничего не возвращает
     // f — нет, так как переменной сразу присваивается значение - мапа с парой key: 1
 }
-
 
 // ============================================================================
 // MAIN — запуск всех задач
