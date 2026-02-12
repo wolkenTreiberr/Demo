@@ -12,6 +12,8 @@ package practice.functions
  * - Scope functions (let, run, apply, also)
  * - Рекурсия + tailrec
  * - Замыкание (closure)
+ * - Перегрузка функций (overloading)
+ * - Переопределение функций (overriding)
  *
  * Как запускать: нажми зелёную стрелку рядом с fun main() внизу файла
  */
@@ -265,6 +267,81 @@ fun task8() {
 }
 
 // ============================================================================
+// 9. ПЕРЕГРУЗКА ФУНКЦИЙ (OVERLOADING)
+// ============================================================================
+
+/*
+ * Задача 9 — Перегрузка функций
+ *
+ * 1. Напиши перегруженные функции describe:
+ *    - describe(value: Int): String — "Число: <value>"
+ *    - describe(value: String): String — "Строка: <value> (длина: <length>)"
+ *    - describe(value: List<*>): String — "Список из <size> элементов"
+ *
+ * 2. Напиши функцию format с default-параметрами, которая заменяет
+ *    необходимость в перегрузке:
+ *    format(value: String, uppercase: Boolean = false, maxLength: Int = Int.MAX_VALUE): String
+ *    - Если uppercase = true — перевести в верхний регистр
+ *    - Если maxLength < длины строки — обрезать до maxLength и добавить "..."
+ */
+fun task9() {
+    // TODO: напиши три перегруженные функции describe
+
+    // После реализации раскомментируй:
+    // println(describe(42))                        // Число: 42
+    // println(describe("Kotlin"))                  // Строка: Kotlin (длина: 6)
+    // println(describe(listOf(1, 2, 3)))           // Список из 3 элементов
+
+    // TODO: напиши функцию format с default-параметрами
+
+    // После реализации раскомментируй:
+    // println(format("hello"))                     // hello
+    // println(format("hello", uppercase = true))   // HELLO
+    // println(format("hello world", maxLength = 5)) // hello...
+}
+
+// ============================================================================
+// 10. ПЕРЕОПРЕДЕЛЕНИЕ ФУНКЦИЙ (OVERRIDING)
+// ============================================================================
+
+/*
+ * Задача 10 — Переопределение функций
+ *
+ * 1. Создай open class Shape с:
+ *    - open fun area(): Double = 0.0
+ *    - open fun describe(): String = "Фигура"
+ *
+ * 2. Создай класс Circle(val radius: Double) : Shape()
+ *    - Переопредели area() — π * r²
+ *    - Переопредели describe() — используй super.describe() + ": Круг с радиусом <radius>"
+ *
+ * 3. Создай класс Rectangle(val width: Double, val height: Double) : Shape()
+ *    - Переопредели area() — width * height
+ *    - Переопредели describe() — аналогично с super
+ *
+ * 4. Напиши функцию printShapeInfo(shape: Shape), которая выводит
+ *    describe() и area(). Вызови с Circle и Rectangle — продемонстрируй полиморфизм.
+ */
+fun task10() {
+    // TODO: создай классы Shape, Circle, Rectangle
+
+    // TODO: напиши функцию printShapeInfo(shape: Shape)
+
+    // После реализации раскомментируй:
+    // val circle = Circle(5.0)
+    // val rectangle = Rectangle(3.0, 4.0)
+    //
+    // printShapeInfo(circle)
+    // printShapeInfo(rectangle)
+
+    // Ожидаемый вывод:
+    // Фигура: Круг с радиусом 5.0
+    // Площадь: 78.53981633974483
+    // Фигура: Прямоугольник 3.0 x 4.0
+    // Площадь: 12.0
+}
+
+// ============================================================================
 // MAIN — запуск всех задач
 // ============================================================================
 
@@ -294,4 +371,10 @@ fun main() {
 
     // ЗАМЫКАНИЕ (CLOSURE)
     // task8()
+
+    // ПЕРЕГРУЗКА ФУНКЦИЙ (OVERLOADING)
+    // task9()
+
+    // ПЕРЕОПРЕДЕЛЕНИЕ ФУНКЦИЙ (OVERRIDING)
+    // task10()
 }

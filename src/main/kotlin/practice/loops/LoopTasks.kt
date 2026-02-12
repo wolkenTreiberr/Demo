@@ -28,7 +28,7 @@ fun task1() {
 
     // TODO: выведи таблицу умножения для number
 
-    for(currentNumber in 1..10){
+    for (currentNumber in 1..10) {
         println("$number * $currentNumber = ${number * currentNumber}")
     }
 
@@ -53,7 +53,7 @@ fun task1() {
 fun task2() {
     // TODO: обратный отсчёт от 10 до 0 с шагом 2
 
-    for(currentNumber in 10 downTo 0 step 2){
+    for (currentNumber in 10 downTo 0 step 2) {
         println(currentNumber)
     }
 
@@ -76,7 +76,7 @@ fun task3() {
 
     // TODO: выведи каждый город с номером
 
-    for((index, name) in cities.withIndex()) {
+    for ((index, name) in cities.withIndex()) {
         println("${index + 1}. $name")
     }
 
@@ -107,7 +107,7 @@ fun task4() {
 
     // TODO: выведи каждую пару в формате "КЛЮЧ = значение"
 
-    for((key, value) in config) {
+    for ((key, value) in config) {
         println("${key.uppercase()} = $value")
     }
 
@@ -136,15 +136,15 @@ fun task5() {
     // TODO: используй while (не for!) для перебора попыток
     var counter = 0
 
-    while(counter < guesses.size) {
+    while (counter < guesses.size) {
         val currentNumber = guesses[counter]
         ++counter
-        if(currentNumber < secret) {
-            println("Попытка ${counter}: $currentNumber - слишком маленькое")
-        } else if(currentNumber > secret) {
-            println("Попытка ${counter}: $currentNumber - слишком большое")
+        if (currentNumber < secret) {
+            println("Попытка $counter: $currentNumber - слишком маленькое")
+        } else if (currentNumber > secret) {
+            println("Попытка $counter: $currentNumber - слишком большое")
         } else {
-            println("Попытка ${counter}: Угадал с $counter попытки!")
+            println("Попытка $counter: Угадал с $counter попытки!")
             break
         }
     }
@@ -178,14 +178,14 @@ fun task6() {
         val currentNumber = rolls[counter]
         ++counter
 
-        if(currentNumber != 6) {
-            println("Бросок ${counter}: $currentNumber")
+        if (currentNumber != 6) {
+            println("Бросок $counter: $currentNumber")
         } else {
-            println("Бросок ${counter}: $currentNumber - Готово!")
+            println("Бросок $counter: $currentNumber - Готово!")
         }
     } while (currentNumber != 6 && counter < rolls.size)
 
-            println("Всего бросков: $counter")
+    println("Всего бросков: $counter")
 
     // Ожидаемый вывод:
     // Бросок 1: 3
@@ -222,8 +222,8 @@ fun task7() {
 
     val logsMap = logs.map { it.split(": ") }
 
-    for((name, msg) in logsMap) {
-        when(name) {
+    for ((name, msg) in logsMap) {
+        when (name) {
             "DEBUG" -> continue
             "FATAL" -> break
             else -> println("$name: $msg")
@@ -232,9 +232,9 @@ fun task7() {
 
     // вариант 2
 
-    for(log in logs) {
-        if(log.startsWith("DEBUG: ")) continue
-        if(log.startsWith("FATAL: ")) break
+    for (log in logs) {
+        if (log.startsWith("DEBUG: ")) continue
+        if (log.startsWith("FATAL: ")) break
         println(log)
     }
 
@@ -264,9 +264,9 @@ fun task8() {
 
     // TODO: найди 42 в матрице, выведи позицию, выйди из обоих циклов
 
-    outer@ for((row, currentMatrixElem) in matrix.withIndex()) {
-        for((column, number) in currentMatrixElem.withIndex()) {
-            if(number == 42) {
+    outer@ for ((row, currentMatrixElem) in matrix.withIndex()) {
+        for ((column, number) in currentMatrixElem.withIndex()) {
+            if (number == 42) {
                 println("Найдено 42 на позиции: строка $row, столбец $column")
                 break@outer
             }
@@ -299,7 +299,7 @@ fun task9() {
         println(names[i])
     }
 
-    for(name in names) {
+    for (name in names) {
         println(name)
     }
 
@@ -312,7 +312,7 @@ fun task9() {
     }
     println()
 
-    for(number in j downTo 0 step 2) {
+    for (number in j downTo 0 step 2) {
         println(number)
     }
 
@@ -361,7 +361,6 @@ fun task10() {
 //            if (a == b) common.add(a)
 //        }
 //    }
-
 
     val common2 = list1.intersect(list2)
     println(common2)
@@ -416,5 +415,5 @@ fun main() {
 //     task9()
 
     // СЛОЖНОСТЬ
-     task10()
+    task10()
 }
