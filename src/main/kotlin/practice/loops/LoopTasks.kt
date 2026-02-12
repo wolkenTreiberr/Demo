@@ -28,6 +28,10 @@ fun task1() {
 
     // TODO: выведи таблицу умножения для number
 
+    for(currentNumber in 1..10){
+        println("$number * $currentNumber = ${number * currentNumber}")
+    }
+
     // Ожидаемый вывод:
     // 7 x 1 = 7
     // 7 x 2 = 14
@@ -49,6 +53,10 @@ fun task1() {
 fun task2() {
     // TODO: обратный отсчёт от 10 до 0 с шагом 2
 
+    for(currentNumber in 10 downTo 0 step 2){
+        println(currentNumber)
+    }
+
     // Ожидаемый вывод:
     // 10 8 6 4 2 0
 }
@@ -67,6 +75,10 @@ fun task3() {
     val cities = listOf("Москва", "Берлин", "Токио", "Нью-Йорк", "Сидней")
 
     // TODO: выведи каждый город с номером
+
+    for((index, name) in cities.withIndex()) {
+        println("${index + 1}. $name")
+    }
 
     // Ожидаемый вывод:
     // 1. Москва
@@ -95,6 +107,10 @@ fun task4() {
 
     // TODO: выведи каждую пару в формате "КЛЮЧ = значение"
 
+    for((key, value) in config) {
+        println("${key.uppercase()} = $value")
+    }
+
     // Ожидаемый вывод:
     // HOST = localhost
     // PORT = 8080
@@ -118,6 +134,20 @@ fun task5() {
     val guesses = listOf(10, 50, 30, 42, 99)
 
     // TODO: используй while (не for!) для перебора попыток
+    var counter = 0
+
+    while(counter < guesses.size) {
+        val currentNumber = guesses[counter]
+        ++counter
+        if(currentNumber < secret) {
+            println("Попытка ${counter}: $currentNumber - слишком маленькое")
+        } else if(currentNumber > secret) {
+            println("Попытка ${counter}: $currentNumber - слишком большое")
+        } else {
+            println("Попытка ${counter}: Угадал с $counter попытки!")
+            break
+        }
+    }
 
     // Ожидаемый вывод:
     // Попытка 1: 10 — слишком маленькое
@@ -141,6 +171,21 @@ fun task6() {
     val rolls = listOf(3, 1, 4, 6, 2, 5)
 
     // TODO: используй do-while для перебора бросков до первой 6
+
+    var counter = 0
+
+    do {
+        val currentNumber = rolls[counter]
+        ++counter
+
+        if(currentNumber != 6) {
+            println("Бросок ${counter}: $currentNumber")
+        } else {
+            println("Бросок ${counter}: $currentNumber - Готово!")
+        }
+    } while (currentNumber != 6 && counter < rolls.size)
+
+            println("Всего бросков: $counter")
 
     // Ожидаемый вывод:
     // Бросок 1: 3
@@ -175,6 +220,24 @@ fun task7() {
 
     // TODO: перебери логи с continue для DEBUG и break для FATAL
 
+    val logsMap = logs.map { it.split(": ") }
+
+    for((name, msg) in logsMap) {
+        when(name) {
+            "DEBUG" -> continue
+            "FATAL" -> break
+            else -> println("$name: $msg")
+        }
+    }
+
+    // вариант 2
+
+    for(log in logs) {
+        if(log.startsWith("DEBUG: ")) continue
+        if(log.startsWith("FATAL: ")) break
+        println(log)
+    }
+
     // Ожидаемый вывод:
     // INFO: Сервер запущен
     // WARN: Мало памяти
@@ -200,6 +263,15 @@ fun task8() {
     )
 
     // TODO: найди 42 в матрице, выведи позицию, выйди из обоих циклов
+
+    outer@ for((row, currentMatrixElem) in matrix.withIndex()) {
+        for((column, number) in currentMatrixElem.withIndex()) {
+            if(number == 42) {
+                println("Найдено 42 на позиции: строка $row, столбец $column")
+                break@outer
+            }
+        }
+    }
 
     // Ожидаемый вывод:
     // Найдено 42 на позиции: строка 1, столбец 1
@@ -227,6 +299,10 @@ fun task9() {
         println(names[i])
     }
 
+    for(name in names) {
+        println(name)
+    }
+
     // Антипаттерн 2: ручной счётчик
     // TODO: перепиши через for
     var j = 10
@@ -236,8 +312,16 @@ fun task9() {
     }
     println()
 
+    for(number in j downTo 0 step 2) {
+        println(number)
+    }
+
     // Антипаттерн 3: модификация во время итерации
     // TODO: перепиши безопасно (filter или MutableIterator)
+
+    val scoresMoreThan50 = scores.filter { it >= 50 }
+    println(scoresMoreThan50)
+
     // ВНИМАНИЕ: этот код упадёт с ConcurrentModificationException!
     // for (score in scores) {
     //     if (score < 50) scores.remove(score)
@@ -271,13 +355,27 @@ fun task10() {
     val list2 = listOf(2, 3, 7, 10, 11, 15)
 
     // Текущая реализация O(n^2) — перепиши:
-    val common = mutableListOf<Int>()
-    for (a in list1) {
-        for (b in list2) {
-            if (a == b) common.add(a)
-        }
-    }
-    println("Общие элементы: $common")
+//    val common = mutableListOf<Int>()
+//    for (a in list1) {
+//        for (b in list2) {
+//            if (a == b) common.add(a)
+//        }
+//    }
+
+
+    val common2 = list1.intersect(list2)
+    println(common2)
+
+    // intersect - убирает дубликаты
+    // вариант 2
+
+    val set2 = list2.toSet()
+    println(set2)
+    val common3 = list1.filter { it in set2 }
+
+    println("Общие элементы: $common3")
+
+    // filter - оставляет дубликаты
 
     // Ожидаемый вывод:
     // Общие элементы: [3, 7, 11]
@@ -291,32 +389,32 @@ fun main() {
     println("=== Запусти нужную задачу, раскомментировав её ===")
 
     // FOR + RANGES
-    // task1()
+//     task1()
 
     // FOR + ОБРАТНЫЙ ПОРЯДОК
-    // task2()
+//     task2()
 
     // FOR + WITHINDEX
-    // task3()
+//     task3()
 
     // FOR + ДЕСТРУКТУРИЗАЦИЯ
-    // task4()
+//     task4()
 
     // WHILE
-    // task5()
+//     task5()
 
     // DO-WHILE
-    // task6()
+//     task6()
 
     // BREAK + CONTINUE
-    // task7()
+//     task7()
 
     // LABELS
-    // task8()
+//     task8()
 
     // АНТИПАТТЕРНЫ
-    // task9()
+//     task9()
 
     // СЛОЖНОСТЬ
-    // task10()
+     task10()
 }

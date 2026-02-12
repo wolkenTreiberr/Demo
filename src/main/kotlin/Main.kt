@@ -9,3 +9,4 @@ fun main() {
     println()
     println("Открой нужную тему в practice/ и запускай задачи")
 }
+
