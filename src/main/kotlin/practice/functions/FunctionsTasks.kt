@@ -120,25 +120,24 @@ fun task1() {
 fun task2() {
     // TODO: перепиши каждую функцию в single-expression
 
-    fun isEven(n: Int): Boolean {
-        return n % 2 == 0
-    }
+    println()
+    println("Задача 2")
+    println("single-expression :")
+    println()
 
-    fun greeting(name: String): String {
-        return "Привет, $name!"
-    }
+    fun isEven(n: Int) = n % 2 == 0
 
-    fun clamp(value: Int, min: Int, max: Int): Int {
-        return if (value < min) min else if (value > max) max else value
-    }
+    fun greeting(name: String) = "Привет, $name!"
+
+    fun clamp(value: Int, min: Int, max: Int) = if (value < min) min else if (value > max) max else value
 
     // После переписывания раскомментируй:
-    // println(isEven(4))               // true
-    // println(isEven(7))               // false
-    // println(greeting("Kotlin"))      // Привет, Kotlin!
-    // println(clamp(15, 0, 10))        // 10
-    // println(clamp(-5, 0, 10))        // 0
-    // println(clamp(5, 0, 10))         // 5
+    println(isEven(4)) // true
+    println(isEven(7)) // false
+    println(greeting("Kotlin")) // Привет, Kotlin!
+    println(clamp(15, 0, 10)) // 10
+    println(clamp(-5, 0, 10)) // 0
+    println(clamp(5, 0, 10)) // 5
 }
 
 // ============================================================================
@@ -402,10 +401,10 @@ fun main() {
     println("=== Запусти нужную задачу, раскомментировав её ===")
 
     // ПАРАМЕТРЫ ФУНКЦИЙ
-    task1()
+//    task1()
 
     // SINGLE-EXPRESSION FUNCTIONS
-    // task2()
+    task2()
 
     // EXTENSION FUNCTIONS
     // task3()
