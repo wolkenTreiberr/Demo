@@ -197,12 +197,27 @@ fun task3() {
 fun task4() {
     // TODO: напиши функцию retry
 
+    fun retry(times: Int, action: () -> Boolean) {
+        var result: Boolean
+
+        for (currentTry in 1..times) {
+            println("Попытка $currentTry...")
+            result = action()
+            if (result) {
+                println("Успех на попытке $currentTry")
+                return
+            }
+
+            if (!result && currentTry == times) println("Не удалось за $currentTry попыток")
+        }
+    }
+
     // После реализации раскомментируй:
-    // var counter = 0
-    // retry(5) {
-    //     counter++
-    //     counter == 3 // "удача" на третьей попытке
-    // }
+    var counter = 0
+    retry(5) {
+        counter++
+        counter == 3 // "удача" на третьей попытке
+    }
 
     // Ожидаемый вывод:
     // Попытка 1...
@@ -426,10 +441,10 @@ fun main() {
 //    task2()
 
     // EXTENSION FUNCTIONS
-    task3()
+//    task3()
 
     // HIGHER-ORDER FUNCTIONS + ЛЯМБДЫ
-    // task4()
+    task4()
 
     // FUNCTION REFERENCES
     // task5()
