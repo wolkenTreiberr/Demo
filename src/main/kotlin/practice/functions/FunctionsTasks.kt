@@ -243,10 +243,16 @@ fun task5() {
 
     // TODO: замени лямбды на function references (::)
 
+    println()
+    println("Задача 5")
+    println("function references :")
+    println()
+
     // Было:
-    val positives = numbers.filter { isPositive(it) }
-    val upperWords = words.map { it.uppercase() }
-    val printed = numbers.forEach { println(it) }
+    val positives = numbers.filter(::isPositive)
+    val upperWords = words.map(String::uppercase)
+
+    val printed = numbers.forEach(::println)
 
     // Должно стать (раскомментируй):
     // val positives = numbers.filter(::isPositive)
@@ -444,10 +450,10 @@ fun main() {
 //    task3()
 
     // HIGHER-ORDER FUNCTIONS + ЛЯМБДЫ
-    task4()
+//    task4()
 
     // FUNCTION REFERENCES
-    // task5()
+    task5()
 
     // SCOPE FUNCTIONS
     // task6()
