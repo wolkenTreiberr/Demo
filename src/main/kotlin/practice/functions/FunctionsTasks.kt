@@ -41,10 +41,63 @@ fun task1() {
     //   formatMessage("привет", prefix = "Лог")               -> "Лог: привет"
     //   formatMessage("привет", prefix = "Лог", uppercase = true) -> "Лог: ПРИВЕТ"
 
+    println()
+    println("Задача 1")
+    println("Функция formatMessage :")
+    println()
+
+    fun formatMessage(text: String, uppercase: Boolean = false, prefix: String = "") {
+        val result = when {
+            uppercase && !prefix.isEmpty() -> "$prefix: ${text.uppercase()}"
+            uppercase -> text.uppercase()
+            !prefix.isEmpty() -> "$prefix: $text"
+            else -> text
+        }
+
+        println(result)
+    }
+
+    formatMessage("привет")
+    formatMessage("привет", uppercase = true)
+    formatMessage("привет", prefix = "Лог")
+    formatMessage("привет", prefix = "Лог", uppercase = true)
+
+    //  Вариант 2
+
+    println("========= OR ==========")
+
+    fun formatMessage2(text: String, uppercase: Boolean = false, prefix: String = "") {
+        var result = text
+        if (uppercase) result = result.uppercase()
+        if (prefix.isNotEmpty()) result = "$prefix: $result"
+        if (uppercase && !prefix.isEmpty()) result = "$prefix: ${result.uppercase()}"
+
+        println(result)
+    }
+
+    formatMessage2("привет")
+    formatMessage2("привет", uppercase = true)
+    formatMessage2("привет", prefix = "Лог")
+    formatMessage2("привет", prefix = "Лог", uppercase = true)
+
     // TODO: напиши функцию joinAll и вызови её:
     //   joinAll(" + ", "a", "b", "c")     -> "a + b + c"
     //   val arr = arrayOf("x", "y", "z")
     //   joinAll("-", *arr)                -> "x-y-z"
+
+    println()
+    println("Функция joinAll :")
+    println()
+
+    fun joinAll(separator: String, vararg words: String): String {
+        if (!separator.isEmpty()) return words.joinToString(separator)
+
+        return words.joinToString(", ")
+    }
+
+    println(joinAll(" + ", "a", "b", "c"))
+    val arr = arrayOf("x", "y", "z")
+    println(joinAll("-", *arr))
 
     // Ожидаемый вывод:
     // привет
@@ -349,7 +402,7 @@ fun main() {
     println("=== Запусти нужную задачу, раскомментировав её ===")
 
     // ПАРАМЕТРЫ ФУНКЦИЙ
-    // task1()
+    task1()
 
     // SINGLE-EXPRESSION FUNCTIONS
     // task2()
