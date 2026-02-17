@@ -154,13 +154,32 @@ fun task2() {
 fun task3() {
     // TODO: напиши три extension functions
 
+    println()
+    println("Задача 3")
+    println("extension functions :")
+    println()
+
+    fun String.removeSpaces() = this.replace(" ", "")
+
+    fun List<Int>.secondMax(): Int? {
+        val max = this.maxOrNull()
+
+        if (max == null || this.size <= 1) return null
+
+        var secondMax = this[0]
+        for (currentNum in this) {
+            if (currentNum in (secondMax + 1)..<max) secondMax = currentNum
+        }
+
+        return secondMax
+    }
     // После реализации раскомментируй:
-    // println("Hello World Kotlin".removeSpaces())     // HelloWorldKotlin
-    // println(listOf(3, 7, 1, 9, 4).secondMax())       // 7
-    // println(listOf(5).secondMax())                    // null
-    // println(7.isPrime())                              // true
-    // println(10.isPrime())                             // false
-    // println(2.isPrime())                              // true
+    println("Hello World Kotlin".removeSpaces()) // HelloWorldKotlin
+    println(listOf(3, 7, 1, 9, 4).secondMax()) // 7
+    println(listOf(5).secondMax()) // null
+//     println(7.isPrime())                              // true
+//     println(10.isPrime())                             // false
+//     println(2.isPrime())                              // true
 }
 
 // ============================================================================
@@ -404,10 +423,10 @@ fun main() {
 //    task1()
 
     // SINGLE-EXPRESSION FUNCTIONS
-    task2()
+//    task2()
 
     // EXTENSION FUNCTIONS
-    // task3()
+    task3()
 
     // HIGHER-ORDER FUNCTIONS + ЛЯМБДЫ
     // task4()
