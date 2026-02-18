@@ -66,13 +66,10 @@ fun task1() {
 
     println("========= OR ==========")
 
-    fun formatMessage2(text: String, uppercase: Boolean = false, prefix: String = "") {
+    fun formatMessage2(text: String, uppercase: Boolean = false, prefix: String = ""): String {
         var result = text
         if (uppercase) result = result.uppercase()
-        if (prefix.isNotEmpty()) result = "$prefix: $result"
-        if (uppercase && !prefix.isEmpty()) result = "$prefix: ${result.uppercase()}"
-
-        println(result)
+        return if (prefix.isNotEmpty()) "$prefix: $result" else result
     }
 
     formatMessage2("привет")
@@ -90,9 +87,18 @@ fun task1() {
     println()
 
     fun joinAll(separator: String, vararg words: String): String {
-        if (!separator.isEmpty()) return words.joinToString(separator)
+//        return words.joinToString(separator)
+        var result = ""
 
-        return words.joinToString(", ")
+        for ((index, word) in words.withIndex()) {
+            if (index > 0) {
+                result += separator + word[index]
+            } else {
+                result = words[index]
+            }
+        }
+
+        return result
     }
 
     println(joinAll(" + ", "a", "b", "c"))
@@ -159,12 +165,13 @@ fun task3() {
     println("extension functions :")
     println()
 
-    fun String.removeSpaces() = this.replace(" ", "")
+    //    fun String.removeSpaces() = this.replace(" ", "")
+    fun String.removeSpaces() = this.filter { it != ' ' }
 
     fun List<Int>.secondMax(): Int? {
         val max = this.maxOrNull()
 
-        if (max == null || this.size <= 1) return null
+        if (max == null || this.size == 1) return null
 
         var secondMax = this[0]
         for (currentNum in this) {
@@ -173,13 +180,34 @@ fun task3() {
 
         return secondMax
     }
+
+    //  Вариант с сортировкой
+
+    fun List<Int>.secondMax2(): Int? {
+        if (this.size < 2) return null
+
+        return this.sortedByDescending { it }[1]
+    }
+
+    fun Int.isPrime(): Boolean {
+        if (this <= 1) return false
+        for (i in 1..this) {
+            if (i != 1 && i != this && this % i == 0) return false
+        }
+
+        return true
+    }
+
     // После реализации раскомментируй:
     println("Hello World Kotlin".removeSpaces()) // HelloWorldKotlin
     println(listOf(3, 7, 1, 9, 4).secondMax()) // 7
     println(listOf(5).secondMax()) // null
-//     println(7.isPrime())                              // true
-//     println(10.isPrime())                             // false
-//     println(2.isPrime())                              // true
+
+    println(listOf(3, 7, 1, 9, 4).secondMax2()) // 7
+    println(listOf(5).secondMax2()) // null
+    println(7.isPrime()) // true
+    println(10.isPrime()) // false
+    println(2.isPrime()) // true
 }
 
 // ============================================================================
@@ -194,6 +222,23 @@ fun task3() {
  * Выводит "Попытка N..." перед каждым вызовом.
  * Если удалось — "Успех на попытке N", если нет — "Не удалось за N попыток".
  */
+
+//  Функция retry2 из task4. Дженерик не может быть внутри другой функции
+
+fun <T> retry2(times: Int, action: () -> T?): T? {
+    for (currentTry in 1..times) {
+        println("Попытка $currentTry...")
+        var result = action()
+        if (result != null) {
+            println("Успех на попытке $currentTry")
+            return result
+        }
+    }
+
+    println("Не удалось за $times попыток")
+    return null
+}
+
 fun task4() {
     // TODO: напиши функцию retry
 
@@ -284,6 +329,12 @@ fun task6() {
     server.isRunning = true
     println(server)
 
+    val server2 = Server().apply {
+        host = "localhost"
+        port = 8080
+        isRunning = true
+    }
+
     // Случай 2: null-проверка + действие
     // TODO: перепиши через подходящий scope function
     val input: String? = "Kotlin"
@@ -291,10 +342,21 @@ fun task6() {
         println("Длина: ${input.length}")
     }
 
+    val input2: String? = "Java"
+    input2?.let {
+        println("Длина: ${input2.length}")
+    }
+
     // Случай 3: логирование без изменения цепочки
     // TODO: перепиши через подходящий scope function
     val numbers = mutableListOf(3, 1, 4, 1, 5)
     println("До сортировки: $numbers")
+    numbers.sort()
+    println("После сортировки: $numbers")
+
+    numbers.also {
+        println("До сортировки: $it")
+    }
     numbers.sort()
     println("После сортировки: $numbers")
 
@@ -322,13 +384,25 @@ fun task6() {
 fun task7() {
     // TODO: напиши обычную рекурсивную версию power
 
+    fun power(base: Int, exp: Int): Long {
+        if (exp == 0) return 1
+        return base * power(base, exp - 1)
+    }
+
     // TODO: напиши tailrec версию powerTailrec
 
+    tailrec fun powerTailrec(base: Int, exp: Int, acc: Long = 1): Long {
+        if (exp == 0) return acc
+        return powerTailrec(base, exp - 1, base * acc)
+    }
+
     // После реализации раскомментируй:
-    // println(power(2, 10))         // 1024
-    // println(power(3, 5))          // 243
-    // println(powerTailrec(2, 10))  // 1024
-    // println(powerTailrec(3, 5))   // 243
+    println(power(2, 10)) // 1024
+    println(power(3, 5)) // 243
+    println(power(3, 1)) // 3
+    println(power(3, 0)) // 1
+    println(powerTailrec(2, 10)) // 1024
+    println(powerTailrec(3, 5)) // 243
 }
 
 // ============================================================================
@@ -347,15 +421,20 @@ fun task7() {
 fun task8() {
     // TODO: напиши функцию makeCounter
 
-    // После реализации раскомментируй:
-    // val counter = makeCounter()
-    // println(counter()) // 0
-    // println(counter()) // 1
-    // println(counter()) // 2
+    fun makeCounter(start: Int = 0): () -> Int {
+        var counter = start
+        return { counter++ }
+    }
 
-    // val counterFrom10 = makeCounter(10)
-    // println(counterFrom10()) // 10
-    // println(counterFrom10()) // 11
+    // После реализации раскомментируй:
+    val counter = makeCounter()
+    println(counter()) // 0
+    println(counter()) // 1
+    println(counter()) // 2
+
+    val counterFrom10 = makeCounter(10)
+    println(counterFrom10()) // 10
+    println(counterFrom10()) // 11
 }
 
 // ============================================================================
@@ -379,12 +458,23 @@ fun task8() {
 fun task9() {
     // TODO: напиши три перегруженные функции describe
 
+    fun describe(value: Int): String = "Число: $value"
+
+    fun describe(value: String): String = "Строка: <$value> (длина: <${value.length}>)"
+
+    fun describe(value: List<*>): String = "Список из <${value.size}> элементов"
+
     // После реализации раскомментируй:
     // println(describe(42))                        // Число: 42
     // println(describe("Kotlin"))                  // Строка: Kotlin (длина: 6)
     // println(describe(listOf(1, 2, 3)))           // Список из 3 элементов
 
     // TODO: напиши функцию format с default-параметрами
+
+    fun format(value: String, uppercase: Boolean = false, maxLength: Int = Int.MAX_VALUE): String {
+        val result = if (uppercase) value.uppercase() else value
+        return if (maxLength < value.length) result.take(maxLength) + "..." else result
+    }
 
     // После реализации раскомментируй:
     // println(format("hello"))                     // hello
@@ -418,6 +508,29 @@ fun task10() {
     // TODO: создай классы Shape, Circle, Rectangle
 
     // TODO: напиши функцию printShapeInfo(shape: Shape)
+
+    open class Shape {
+        open fun area(): Double = 0.0
+
+        open fun describe(): String = "Фигура"
+    }
+
+    class Circle(val radius: Double) : Shape() {
+        override fun area(): Double = Math.PI * radius * radius
+
+        override fun describe(): String = "${super.describe()}: Круг с радиусом $radius"
+    }
+
+    class Rectangle(val width: Double, val height: Double) : Shape() {
+        override fun area(): Double = width * height
+
+        override fun describe(): String = "${super.describe()}: Прямоугольник с шириной $width и высотой $height>"
+    }
+
+    fun printShapeInfo(shape: Shape) {
+        println(shape.describe())
+        println(shape.area())
+    }
 
     // После реализации раскомментируй:
     // val circle = Circle(5.0)
@@ -453,16 +566,16 @@ fun main() {
 //    task4()
 
     // FUNCTION REFERENCES
-    task5()
+//    task5()
 
     // SCOPE FUNCTIONS
     // task6()
 
     // РЕКУРСИЯ + TAILREC
-    // task7()
+//    task7()
 
     // ЗАМЫКАНИЕ (CLOSURE)
-    // task8()
+    task8()
 
     // ПЕРЕГРУЗКА ФУНКЦИЙ (OVERLOADING)
     // task9()
