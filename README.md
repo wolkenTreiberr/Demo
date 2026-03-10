@@ -49,13 +49,18 @@
 - Overriding
 
 ### 6. ООП
-- Классы, primary / secondary constructors
+> [Теория](src/main/kotlin/practice/oop/ООП.md) | [Задания](src/main/kotlin/practice/oop/OopTasks.kt)
+
+- Классы, свойства, backing field
+- Primary / secondary constructors
 - Init block, порядок инициализации
-- this keyword
-- Inheritance (open, override, super)
-- Visibility modifiers (public, private, protected, internal)
-- Abstract classes
-- Interfaces (default methods, multiple inheritance)
+- this keyword, this@label
+- Инкапсуляция, visibility modifiers (public, private, protected, internal)
+- Наследование (open, override, super, Any, final by default)
+- Полиморфизм (динамическая диспетчеризация)
+- Абстракция (abstract classes, interfaces, default methods, multiple inheritance)
+- Композиция vs наследование
+- Антипаттерны ООП
 
 ### 7. Типы классов
 - Data classes (equals, hashCode, toString, copy, destructuring)
@@ -77,7 +82,16 @@
 - `*` Collection operations (filter, map, flatMap, reduce, fold, groupBy, sortedBy, zip, associate)
 - `*` Sequences (lazy evaluation vs eager)
 
-### 9. Generics
+### 9. SOLID
+> [Теория](src/main/kotlin/practice/solid/SOLID.md) | [Задания](src/main/kotlin/practice/solid/SolidTasks.kt)
+
+- Single Responsibility Principle (SRP)
+- Open-Closed Principle (OCP)
+- Liskov Substitution Principle (LSP)
+- Interface Segregation Principle (ISP)
+- Dependency Inversion Principle (DIP)
+
+### 10. Generics
 - Type parameters, generic classes / functions
 
 ---
