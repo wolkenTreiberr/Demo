@@ -63,11 +63,13 @@
 - Антипаттерны ООП
 
 ### 7. Типы классов
+> [Теория](src/main/kotlin/practice/classes/Типы%20классов.md) | [Задания](src/main/kotlin/practice/classes/ClassTypeTasks.kt)
+
 - Data classes (equals, hashCode, toString, copy, destructuring)
-- Enum classes (values, valueOf, properties, abstract methods)
+- Enum classes (entries, valueOf, свойства, абстрактные методы)
 - `*` Sealed classes / sealed interfaces
 - Object declarations (singleton)
-- Companion object
+- Companion object (factory methods, константы)
 - `*` Data objects
 - `*` Nested / Inner classes
 - `*` Anonymous classes / object expressions
